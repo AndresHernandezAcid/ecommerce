@@ -5,10 +5,10 @@ var Administrador = function(){
 
 }
 
-Administrador.prototype.existeProducto = function(nombreProducto) {
+Administrador.prototype.existeProducto = function(idProducto) {
 	for(var i = 0; i < this.bodega.contenido.length; i++){
-		if(this.bodega.contenido[i].nombre === nombreProducto){
-			return i;
+		if(this.bodega.contenido[i].id === idProducto){
+			return this.bodega.contenido[i];
 		}
 	}
 	return -1;
@@ -51,7 +51,6 @@ Administrador.prototype.agregarRegistro = function(registro) {
 },{}],2:[function(require,module,exports){
 var Bodega = function(){
 	this.contenido = [];
-
 }
 
 Bodega.prototype.ponerProducto = function(producto) {
@@ -61,8 +60,6 @@ Bodega.prototype.ponerProducto = function(producto) {
 Bodega.prototype.quitarProducto = function(indice) {
 	return this.contenido.splice(indice,1)[0];
 };
-
-
 
 
 
@@ -84,6 +81,22 @@ var texto;
 
 $(document).ready(function() {
 
+tienda = new Tienda();
+	tienda.administrador.agregarProducto(new Producto("a","1","101"));
+	tienda.administrador.agregarProducto(new Producto("b","1","202"));
+	tienda.administrador.agregarProducto(new Producto("c","1","303"));
+	tienda.administrador.agregarProducto(new Producto("d","1","104"));
+	tienda.administrador.agregarProducto(new Producto("e","1","205"));
+	tienda.administrador.agregarProducto(new Producto("f","1","306"));
+	tienda.administrador.agregarProducto(new Producto("g","1","107"));
+	tienda.administrador.agregarProducto(new Producto("h","1","208"));
+	tienda.administrador.agregarProducto(new Producto("i","1","309"));
+
+	
+
+
+
+
 	$("#search").keypress(function(e) {
 	  if(e.which == 13) {
 	    //Get
@@ -92,6 +105,12 @@ $(document).ready(function() {
 	  }
 	});
 
+	 
+	 $("#agregar1").click(function(e){
+	 	tienda.administrador.existeProducto()
+	 });
+	
+
 });
 
 var imprimirTexto = function(){
@@ -99,13 +118,17 @@ var imprimirTexto = function(){
 }
 
 
+
 },{}],5:[function(require,module,exports){
+var contador = 1
 var Producto = function(nombre,cantidad,precio){
 
+	this.id = contador;
 	this.nombre = nombre;
 	this.cantidad = cantidad;
 	this.precio = precio;
 
+	contador++;
 }
 },{}],6:[function(require,module,exports){
 var Repositorio = function(){

@@ -4,10 +4,10 @@ var Administrador = function(){
 
 }
 
-Administrador.prototype.existeProducto = function(nombreProducto) {
+Administrador.prototype.existeProducto = function(idProducto) {
 	for(var i = 0; i < this.bodega.contenido.length; i++){
-		if(this.bodega.contenido[i].nombre === nombreProducto){
-			return i;
+		if(this.bodega.contenido[i].id === idProducto){
+			return this.bodega.contenido[i];
 		}
 	}
 	return -1;
